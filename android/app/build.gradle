@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
 }
 
-def marinaraPort = (project.findProperty("marinaraPort") ?: "7860").toString()
+def marinaraPort = (project.findProperty("marinaraPort") ?: "7869").toString()
 def releaseKeystorePath = System.getenv("ANDROID_SIGNING_KEYSTORE")
 def releaseKeystorePassword = System.getenv("ANDROID_SIGNING_STORE_PASSWORD")
 def releaseKeystoreType = System.getenv("ANDROID_SIGNING_STORE_TYPE") ?: "pkcs12"

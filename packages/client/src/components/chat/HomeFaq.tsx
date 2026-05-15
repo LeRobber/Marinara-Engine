@@ -68,10 +68,10 @@ const HOME_FAQ_ITEMS: HomeFaqItem[] = [
   {
     id: "blank-page-localhost",
     category: "Setup",
-    question: "I get a blank page or ERR_EMPTY_RESPONSE on localhost:7860. What should I try?",
+    question: "I get a blank page or ERR_EMPTY_RESPONSE on localhost:7869. What should I try?",
     answer: "This is usually a browser state problem rather than a dead install.",
     bullets: [
-      "Try localhost:7860 instead of 127.0.0.1, or the reverse if you already used localhost.",
+      "Try localhost:7869 instead of 127.0.0.1, or the reverse if you already used localhost.",
       "Hard refresh with Ctrl+Shift+R and clear the site's local storage.",
       "Test in incognito or a different browser.",
       "Docker and Podman users hit the same symptom, so browser cleanup is still worth trying there too.",

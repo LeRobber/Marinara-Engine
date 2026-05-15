@@ -160,7 +160,7 @@ Changes to these still need a restart because they're bound at startup: `PORT`, 
 
 After saving `.env` (and restarting if required), from your remote device:
 
-1. Open `http://<host-ip>:7860` (or your container/Tailscale address).
+1. Open `http://<host-ip>:7869` (or your container/Tailscale address).
 2. Basic Auth: you should see a browser password prompt. Enter your credentials.
 3. IP Allowlist: the page should load directly with no prompt.
 4. Private-network bypass: the page should load directly with no prompt, **only** if your client IP is in a private-network range.
@@ -175,9 +175,9 @@ Still getting a 403? Check:
 Different error than 403?
 
 - **Connection refused / timeout** — the server isn't bound to a reachable interface. Set `HOST=0.0.0.0` in `.env`.
-- **404 / wrong page** — you're hitting the wrong port. Default is `7860`; check `PORT` in `.env`.
+- **404 / wrong page** — you're hitting the wrong port. Default is `7869`; check `PORT` in `.env`.
 - **CORS error in the browser console** — Marinara's server log will show a `[cors]` line with the rejected origin and the exact `CORS_ORIGINS=…` line to add to `.env`. Adding it takes effect within ~2s — no restart needed.
-- **`{"code": "CSRF_ORIGIN_NOT_TRUSTED", "error": "Origin '…' is not in the trusted list (CSRF_TRUSTED_ORIGINS)."}`** — Marinara also pops a "Save blocked: origin not trusted" toast in the UI so saves can't silently fail. Loopback, LAN, Tailscale (100.64.0.0/10), and Docker bridge (172.16.0.0/12) IP-literal origins are auto-trusted; public IPs and DNS names need to be listed explicitly. Multiple origins are comma-separated, e.g. `CSRF_TRUSTED_ORIGINS=http://203.0.113.10:7831,https://chat.example.com,http://box.tailnet.ts.net:7860`. The error body's `hint` field has the exact line. No restart needed. Marinara also logs the active auto-trust scope on startup under `[csrf] Auto-trusted …`.
+- **`{"code": "CSRF_ORIGIN_NOT_TRUSTED", "error": "Origin '…' is not in the trusted list (CSRF_TRUSTED_ORIGINS)."}`** — Marinara also pops a "Save blocked: origin not trusted" toast in the UI so saves can't silently fail. Loopback, LAN, Tailscale (100.64.0.0/10), and Docker bridge (172.16.0.0/12) IP-literal origins are auto-trusted; public IPs and DNS names need to be listed explicitly. Multiple origins are comma-separated, e.g. `CSRF_TRUSTED_ORIGINS=http://203.0.113.10:7831,https://chat.example.com,http://box.tailnet.ts.net:7869`. The error body's `hint` field has the exact line. No restart needed. Marinara also logs the active auto-trust scope on startup under `[csrf] Auto-trusted …`.
 - **`Refused to fetch http://… : '…' is in a private, loopback, metadata, or reserved IP range.`** — Marinara is refusing to call your local LLM provider for SSRF safety. The error message names the exact env var to set (`PROVIDER_LOCAL_URLS_ENABLED` for LLMs, `IMAGE_LOCAL_URLS_ENABLED` for image generation, etc.). Setting it takes effect on the next request.
 
 The full troubleshooting page is at [docs/TROUBLESHOOTING.md](TROUBLESHOOTING.md).

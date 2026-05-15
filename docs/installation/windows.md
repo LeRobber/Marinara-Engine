@@ -51,7 +51,7 @@ pnpm build
 pnpm start
 ```
 
-Then open **<http://127.0.0.1:7860>**. Everything runs locally.
+Then open **<http://127.0.0.1:7869>**. Everything runs locally.
 
 > `pnpm start` binds to `127.0.0.1` by default. To allow LAN access, set `HOST=0.0.0.0` in `.env` first.
 

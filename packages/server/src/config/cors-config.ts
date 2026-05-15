@@ -11,7 +11,7 @@
 //     If the browser's Origin header matches the URL the request actually
 //     reached (the Host header), it's by definition same-origin and CORS
 //     restrictions don't apply. This means a user who visits Marinara at
-//     http://localhost:7860 OR http://100.x.y.z:7860 (Tailscale) doesn't
+//     http://localhost:7869 OR http://100.x.y.z:7869 (Tailscale) doesn't
 //     have to add either URL to CORS_ORIGINS — same-origin "just works."
 //     They only need CORS_ORIGINS for genuine cross-origin frontends (a
 //     dev Vite server on a different port, a separate hostname behind a

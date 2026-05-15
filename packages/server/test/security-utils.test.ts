@@ -60,14 +60,14 @@ test("AVIF validation requires an AVIF-compatible ftyp brand", () => {
 
 test("normalizeLoopbackUrl maps localhost names to IPv4 loopback", () => {
   assert.equal(normalizeLoopbackUrl("http://localhost:8188/object_info"), "http://127.0.0.1:8188/object_info");
-  assert.equal(normalizeLoopbackUrl("http://localhost.localdomain:7860"), "http://127.0.0.1:7860/");
-  assert.equal(normalizeLoopbackUrl("http://127.0.0.1:7860"), "http://127.0.0.1:7860/");
+  assert.equal(normalizeLoopbackUrl("http://localhost.localdomain:7869"), "http://127.0.0.1:7869/");
+  assert.equal(normalizeLoopbackUrl("http://127.0.0.1:7869"), "http://127.0.0.1:7869/");
 });
 
 test("validateOutboundUrl rejects local/private/metadata destinations", async () => {
-  await assert.rejects(() => validateOutboundUrl("http://127.0.0.1:7860", { allowedProtocols: ["http:", "https:"] }));
-  await assert.rejects(() => validateOutboundUrl("http://localhost:7860", { allowedProtocols: ["http:", "https:"] }));
-  await assert.rejects(() => validateOutboundUrl("http://[::1]:7860", { allowedProtocols: ["http:", "https:"] }));
+  await assert.rejects(() => validateOutboundUrl("http://127.0.0.1:7869", { allowedProtocols: ["http:", "https:"] }));
+  await assert.rejects(() => validateOutboundUrl("http://localhost:7869", { allowedProtocols: ["http:", "https:"] }));
+  await assert.rejects(() => validateOutboundUrl("http://[::1]:7869", { allowedProtocols: ["http:", "https:"] }));
   await assert.rejects(() => validateOutboundUrl("http://10.0.0.1", { allowedProtocols: ["http:", "https:"] }));
   await assert.rejects(() => validateOutboundUrl("http://192.168.1.1", { allowedProtocols: ["http:", "https:"] }));
   await assert.rejects(() => validateOutboundUrl("http://169.254.169.254", { allowedProtocols: ["http:", "https:"] }));

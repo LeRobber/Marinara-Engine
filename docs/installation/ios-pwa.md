@@ -6,7 +6,7 @@ Marinara Engine does not run the local server directly on iOS or iPadOS. Use one
 
 1. Start Marinara Engine on the host device.
 2. If the iPhone or iPad is a different device, make sure the server is bound to `0.0.0.0`. The shell launchers do this by default; manual `pnpm start` users can set `HOST=0.0.0.0` in `.env`.
-3. Open Safari and visit `http://<host-ip>:7860`, replacing `<host-ip>` with the host device's LAN or Tailscale address.
+3. Open Safari and visit `http://<host-ip>:7869`, replacing `<host-ip>` with the host device's LAN or Tailscale address.
 4. For ordinary LAN clients, configure `BASIC_AUTH_USER` and `BASIC_AUTH_PASS` on the server. Tailscale clients are trusted by default unless `BYPASS_AUTH_TAILSCALE=false` is set.
 5. For privileged actions from iOS, set `ADMIN_SECRET` on the server and save the same value in **Settings → Advanced → Admin Access**.
 

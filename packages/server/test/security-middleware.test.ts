@@ -248,7 +248,7 @@ test("CSRF 403 body carries a stable code field clients can detect", async () =>
         url: "/api/mutate",
         remoteAddress: "127.0.0.1",
         headers: {
-          host: "127.0.0.1:7860",
+          host: "127.0.0.1:7869",
           origin: "http://71.175.221.189:7831",
           [CSRF_HEADER]: CSRF_HEADER_VALUE,
         },
@@ -264,7 +264,7 @@ test("CSRF 403 body carries a stable code field clients can detect", async () =>
         url: "/api/mutate",
         remoteAddress: "127.0.0.1",
         headers: {
-          host: "127.0.0.1:7860",
+          host: "127.0.0.1:7869",
           referer: "http://71.175.221.189:7831/chat",
           [CSRF_HEADER]: CSRF_HEADER_VALUE,
         },
@@ -278,8 +278,8 @@ test("CSRF 403 body carries a stable code field clients can detect", async () =>
         url: "/api/mutate",
         remoteAddress: "127.0.0.1",
         headers: {
-          host: "127.0.0.1:7860",
-          origin: "http://127.0.0.1:7860",
+          host: "127.0.0.1:7869",
+          origin: "http://127.0.0.1:7869",
           "sec-fetch-site": "same-site",
         },
       });
@@ -302,7 +302,7 @@ test("/api/csrf/origin-status reports loopback as trusted", async () =>
         method: "GET",
         url: "/api/csrf/origin-status",
         remoteAddress: "127.0.0.1",
-        headers: { host: "127.0.0.1:7860", origin: "http://127.0.0.1:7860" },
+        headers: { host: "127.0.0.1:7869", origin: "http://127.0.0.1:7869" },
       });
       assert.equal(res.statusCode, 200);
       const body = JSON.parse(res.body) as { trusted: boolean; code: string | null };
@@ -324,7 +324,7 @@ test("/api/csrf/origin-status reports public-IP origins as untrusted with a hint
         method: "GET",
         url: "/api/csrf/origin-status",
         remoteAddress: "127.0.0.1",
-        headers: { host: "127.0.0.1:7860", origin: "http://71.175.221.189:7831" },
+        headers: { host: "127.0.0.1:7869", origin: "http://71.175.221.189:7831" },
       });
       assert.equal(res.statusCode, 200);
       const body = JSON.parse(res.body) as {
@@ -369,7 +369,7 @@ test("/api/csrf/origin-status reports trusted once the origin is in CSRF_TRUSTED
 test("CSRF_TRUSTED_ORIGINS accepts a comma-separated list of origins", async () =>
   withEnv(
     {
-      CSRF_TRUSTED_ORIGINS: "http://71.175.221.189:7831, https://chat.example.test, http://my-host.tail-scale.ts.net:7860",
+      CSRF_TRUSTED_ORIGINS: "http://71.175.221.189:7831, https://chat.example.test, http://my-host.tail-scale.ts.net:7869",
     },
     async () => {
       const app = await buildHookApp();
@@ -377,7 +377,7 @@ test("CSRF_TRUSTED_ORIGINS accepts a comma-separated list of origins", async () 
         for (const origin of [
           "http://71.175.221.189:7831",
           "https://chat.example.test",
-          "http://my-host.tail-scale.ts.net:7860",
+          "http://my-host.tail-scale.ts.net:7869",
         ]) {
           const res = await app.inject({
             method: "POST",
@@ -407,8 +407,8 @@ test("same-origin unsafe API requests allow stale clients without the CSRF heade
         url: "/api/mutate",
         remoteAddress: "127.0.0.1",
         headers: {
-          host: "127.0.0.1:7860",
-          origin: "http://127.0.0.1:7860",
+          host: "127.0.0.1:7869",
+          origin: "http://127.0.0.1:7869",
           "sec-fetch-site": "same-origin",
         },
       });
@@ -419,8 +419,8 @@ test("same-origin unsafe API requests allow stale clients without the CSRF heade
         url: "/api/mutate",
         remoteAddress: "127.0.0.1",
         headers: {
-          host: "127.0.0.1:7860",
-          origin: "http://127.0.0.1:7860",
+          host: "127.0.0.1:7869",
+          origin: "http://127.0.0.1:7869",
           "sec-fetch-site": "same-origin",
           [CSRF_HEADER]: CSRF_HEADER_VALUE,
         },
@@ -473,7 +473,7 @@ test("trusted cross-origin unsafe API requests without fetch metadata require th
         url: "/api/mutate",
         remoteAddress: "127.0.0.1",
         headers: {
-          host: "127.0.0.1:7860",
+          host: "127.0.0.1:7869",
           origin: "https://trusted.example.test",
         },
       });
@@ -484,7 +484,7 @@ test("trusted cross-origin unsafe API requests without fetch metadata require th
         url: "/api/mutate",
         remoteAddress: "127.0.0.1",
         headers: {
-          host: "127.0.0.1:7860",
+          host: "127.0.0.1:7869",
           origin: "https://trusted.example.test",
           [CSRF_HEADER]: CSRF_HEADER_VALUE,
         },
@@ -526,8 +526,8 @@ test("CSRF protection allows private literal network origins with the CSRF heade
         url: "/api/mutate",
         remoteAddress: "192.168.1.50",
         headers: {
-          host: "192.168.1.10:7860",
-          origin: "http://192.168.1.10:7860",
+          host: "192.168.1.10:7869",
+          origin: "http://192.168.1.10:7869",
           "sec-fetch-site": "same-origin",
           [CSRF_HEADER]: CSRF_HEADER_VALUE,
         },
@@ -539,8 +539,8 @@ test("CSRF protection allows private literal network origins with the CSRF heade
         url: "/api/mutate",
         remoteAddress: "100.64.1.50",
         headers: {
-          host: "100.64.1.10:7860",
-          origin: "http://100.64.1.10:7860",
+          host: "100.64.1.10:7869",
+          origin: "http://100.64.1.10:7869",
           "sec-fetch-site": "same-origin",
           [CSRF_HEADER]: CSRF_HEADER_VALUE,
         },
@@ -581,7 +581,7 @@ test("CSRF protection allows explicit wildcard trusted origins with the CSRF hea
         url: "/api/mutate",
         remoteAddress: "127.0.0.1",
         headers: {
-          host: "127.0.0.1:7860",
+          host: "127.0.0.1:7869",
           origin: "https://trusted-by-wildcard.example",
           "sec-fetch-site": "cross-site",
           [CSRF_HEADER]: CSRF_HEADER_VALUE,
@@ -602,8 +602,8 @@ test("CSRF protection still rejects private-network DNS rebinding-style origins"
         url: "/api/mutate",
         remoteAddress: "192.168.1.50",
         headers: {
-          host: "evil.example:7860",
-          origin: "http://evil.example:7860",
+          host: "evil.example:7869",
+          origin: "http://evil.example:7869",
           "sec-fetch-site": "same-origin",
           [CSRF_HEADER]: CSRF_HEADER_VALUE,
         },

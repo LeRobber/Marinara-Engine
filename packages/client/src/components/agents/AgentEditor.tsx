@@ -90,11 +90,11 @@ function createCustomAgentType(name: string): string {
 // https:// or http://127.0.0.1, so fall back to loopback whenever the page
 // is served over plain HTTP from a non-loopback host.
 function getDisplayedSpotifyRedirectUri(): string {
-  if (typeof window === "undefined") return "http://127.0.0.1:7860/api/spotify/callback";
+  if (typeof window === "undefined") return "http://127.0.0.1:7869/api/spotify/callback";
   const { protocol, hostname, origin, port } = window.location;
   const isLoopback = hostname === "127.0.0.1" || hostname === "::1" || hostname === "[::1]";
   if (protocol === "https:" || isLoopback) return `${origin}/api/spotify/callback`;
-  return `http://127.0.0.1:${port || "7860"}/api/spotify/callback`;
+  return `http://127.0.0.1:${port || "7869"}/api/spotify/callback`;
 }
 
 // ═══════════════════════════════════════════════
@@ -1460,7 +1460,7 @@ export function AgentEditor() {
                             setSpotifyPasteError(null);
                           }}
                           rows={3}
-                          placeholder="http://127.0.0.1:7860/api/spotify/callback?code=...&state=..."
+                          placeholder="http://127.0.0.1:7869/api/spotify/callback?code=...&state=..."
                           className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-[0.6875rem] text-white placeholder-white/20 outline-none focus:border-green-500/50 focus:ring-1 focus:ring-green-500/20 font-mono"
                         />
                         {spotifyPasteError && <p className="text-red-400/80 text-[0.625rem]">{spotifyPasteError}</p>}

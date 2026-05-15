@@ -34,10 +34,10 @@ You can restore the old unauthenticated LAN behavior with `ALLOW_UNAUTHENTICATED
 Navigate to:
 
 ```
-http://<host-ip>:7860
+http://<host-ip>:7869
 ```
 
-For example: `http://192.168.1.42:7860`
+For example: `http://192.168.1.42:7869`
 
 ## 5. (Optional) Install the PWA
 
@@ -51,7 +51,7 @@ Tools like [Tailscale](https://tailscale.com/) give each device a stable IP addr
 
 - Verify both devices are on the same Wi-Fi network.
 - Confirm `HOST=0.0.0.0` and, for ordinary LAN access, Basic Auth credentials are set on the server.
-- Check that no firewall is blocking the configured port (default `7860`).
+- Check that no firewall is blocking the configured port (default `7869`).
 - See the [Troubleshooting](TROUBLESHOOTING.md#app-not-loading-on-mobile--another-device) page for more help.
 
 ### Using the Spotify DJ agent on a LAN install?

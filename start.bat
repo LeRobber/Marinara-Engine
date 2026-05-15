@@ -244,7 +244,7 @@ for /f "usebackq eol=# tokens=1,* delims==" %%A in (".env") do (
 :skip_env
 :: Set defaults only if not already set
 set NODE_ENV=production
-if not defined PORT set PORT=7860
+if not defined PORT set PORT=7869
 if not defined HOST set HOST=0.0.0.0
 
 set PROTOCOL=http

@@ -326,7 +326,7 @@ echo    %INSTALL_DIR%
 echo.
 echo    The app opens in your browser at the configured local URL.
 echo    Default:
-echo    http://127.0.0.1:7860
+echo    http://127.0.0.1:7869
 echo  ==========================================
 echo.
 pause

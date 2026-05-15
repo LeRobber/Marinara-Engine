@@ -283,7 +283,7 @@ if [ -f .env ]; then
 fi
 
 export NODE_ENV=production
-export PORT=${PORT:-7860}
+export PORT=${PORT:-7869}
 export HOST=${HOST:-0.0.0.0}
 
 if [ -n "$SSL_CERT" ] && [ -n "$SSL_KEY" ]; then

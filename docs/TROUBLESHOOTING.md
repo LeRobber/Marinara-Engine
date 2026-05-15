@@ -40,7 +40,7 @@ If you're accessing Marinara Engine from a phone or tablet on the same network a
 - The compatibility switch `ALLOW_UNAUTHENTICATED_PRIVATE_NETWORK=true` restores old unauthenticated LAN behavior outside the default trusted Tailscale and Docker bridge ranges, but only use it on a trusted private network.
 - If a save appears to succeed in the UI but does not persist (preset, persona, or settings reverts on reload), check the browser for a Marinara "Save blocked: origin not trusted" toast and the server log for `[csrf] Rejected request:`. Loopback, LAN, Tailscale (100.64.0.0/10), and Docker bridge (172.16.0.0/12) origins are auto-trusted when the browser's URL is an IP literal, so this usually only happens when you reach Marinara through a public IP or DNS name. Add it to `CSRF_TRUSTED_ORIGINS` in `.env` — comma-separated for multiple origins, for example `CSRF_TRUSTED_ORIGINS=http://203.0.113.10:7831,https://chat.example.com`. Use `*` only on a fully trusted private setup. No restart needed.
 - Verify both devices are on the same Wi-Fi network.
-- Check that no firewall is blocking port `7860` (or your configured `PORT`).
+- Check that no firewall is blocking port `7869` (or your configured `PORT`).
 
 See the [LAN / mobile access FAQ](FAQ.md#how-do-i-access-marinara-engine-from-my-phone-or-another-device) for full setup details.
 
@@ -58,7 +58,7 @@ If the APK stays on the connection screen:
 4. Wait for the launcher to finish and start the server.
 5. Open the APK again.
 
-Also confirm the APK and Termux use the same port. The default is `7860`; if you built the APK with `MARINARA_PORT=9000`, set `PORT=9000` in Termux's `.env` too.
+Also confirm the APK and Termux use the same port. The default is `7869`; if you built the APK with `MARINARA_PORT=9000`, set `PORT=9000` in Termux's `.env` too.
 
 ---
 
@@ -86,12 +86,12 @@ The default v1.5.7 storage path no longer uses the persistent SQLite file as liv
 
 ## Spotify DJ Login Fails on a Remote or LAN Install
 
-The Spotify DJ agent uses OAuth, and Spotify [tightened its redirect-URI rules in February 2025](https://developer.spotify.com/blog/2025-02-12-increasing-the-security-requirements-for-integrating-with-spotify): registered redirect URIs must be either `https://<any-host>` or one of the loopback literals `http://127.0.0.1` / `http://[::1]`. `localhost` and LAN IPs (e.g. `http://192.168.1.42:7860`) are rejected at registration. That means the redirect URI Marinara shows in the agent editor depends on how you reach the server:
+The Spotify DJ agent uses OAuth, and Spotify [tightened its redirect-URI rules in February 2025](https://developer.spotify.com/blog/2025-02-12-increasing-the-security-requirements-for-integrating-with-spotify): registered redirect URIs must be either `https://<any-host>` or one of the loopback literals `http://127.0.0.1` / `http://[::1]`. `localhost` and LAN IPs (e.g. `http://192.168.1.42:7869`) are rejected at registration. That means the redirect URI Marinara shows in the agent editor depends on how you reach the server:
 
 - **Localhost** — the editor shows `http://127.0.0.1:<PORT>/api/spotify/callback`. Register that and the popup callback completes normally.
 - **HTTPS deployment** — when the request reaches Marinara as `https://...` (own TLS via `SSL_CERT`/`SSL_KEY`, or a reverse proxy that sends `X-Forwarded-Proto: https`), the editor shows `https://<your-host>/api/spotify/callback`. Register that.
 - **HTTPS terminated upstream where the request host doesn't match the public URL** — set `SPOTIFY_REDIRECT_URI=https://your-public-host/api/spotify/callback` in `.env` and Marinara will use it verbatim.
-- **Plain-HTTP LAN/remote install** (Marinara on machine A, browser on machine B, no TLS) — Spotify won't accept `http://192.168.x.y:7860/...`, so the editor still shows the `127.0.0.1` URI. Register that anyway. The popup will fail to load on machine B (it's pointing at machine B's loopback, where nothing is listening), but the URL Spotify redirected to still contains the valid `code` and `state`. **Copy the full URL from the popup's address bar, then expand "Browser couldn't reach the callback?" under the Connect button and paste it.** Marinara will complete the token exchange server-side. The pasted URL is valid for 10 minutes.
+- **Plain-HTTP LAN/remote install** (Marinara on machine A, browser on machine B, no TLS) — Spotify won't accept `http://192.168.x.y:7869/...`, so the editor still shows the `127.0.0.1` URI. Register that anyway. The popup will fail to load on machine B (it's pointing at machine B's loopback, where nothing is listening), but the URL Spotify redirected to still contains the valid `code` and `state`. **Copy the full URL from the popup's address bar, then expand "Browser couldn't reach the callback?" under the Connect button and paste it.** Marinara will complete the token exchange server-side. The pasted URL is valid for 10 minutes.
 
 If you'd prefer to avoid the paste-back step on a LAN install, the cleanest fix is to put the server behind HTTPS — even a self-signed cert or a reverse proxy on your LAN works.
 

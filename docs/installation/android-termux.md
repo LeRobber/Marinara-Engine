@@ -24,11 +24,11 @@ This one-liner:
 4. Makes the launcher executable
 5. Runs the Termux launcher for the first time
 
-The Termux launcher installs dependencies, builds the app, prepares local file-backed storage, and starts the server at `http://127.0.0.1:<PORT>` using the `PORT` value from `.env` or the default `7860`.
+The Termux launcher installs dependencies, builds the app, prepares local file-backed storage, and starts the server at `http://127.0.0.1:<PORT>` using the `PORT` value from `.env` or the default `7869`.
 
 > **Note:** The first run takes a few minutes because it builds the app on your device. Subsequent runs are much faster.
 
-After installation, open **<http://127.0.0.1:7860>** in your Android browser, or install the PWA from the "Add to Home Screen" prompt for a more native experience.
+After installation, open **<http://127.0.0.1:7869>** in your Android browser, or install the PWA from the "Add to Home Screen" prompt for a more native experience.
 
 ## Starting the App Again
 
