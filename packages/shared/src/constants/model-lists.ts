@@ -474,7 +474,7 @@ export const IMAGE_GENERATION_SOURCES: ImageGenSource[] = [
     id: "automatic1111",
     name: "SD Web UI (AUTOMATIC1111 / Forge)",
     description: "Local Stable Diffusion via AUTOMATIC1111 or SD.Next WebUI.",
-    defaultBaseUrl: "http://localhost:7869",
+    defaultBaseUrl: "http://localhost:7860",
     requiresApiKey: false,
   },
   {
@@ -488,7 +488,7 @@ export const IMAGE_GENERATION_SOURCES: ImageGenSource[] = [
     id: "drawthings",
     name: "Draw Things",
     description: "macOS / iOS local image generation via Draw Things.",
-    defaultBaseUrl: "http://localhost:7869",
+    defaultBaseUrl: "http://localhost:7860",
     requiresApiKey: false,
   },
   {
